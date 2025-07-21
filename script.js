@@ -1,0 +1,7 @@
+const billinput=document.getElementById("bill")
+const tipbutton=document.querySelectorAll(".tip-calculator-btn")
+const customtip=document.getElementById("custom-tip")
+const numofPeople=document.getElementById("num-people")
+const tipamountdisplay=document.getElementById("tip-amount-display")
+const totalamountdisplay=document.getElementById("total-amount-display")
+const resetbtn=document.getElementById("reset-button")
