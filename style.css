@@ -132,3 +132,123 @@ label,.form-control>p{
     border: solid 1px orangered;
     outline: none;
 }
+@media screen and (max-width: 768px) {
+    .calculator-container {
+        padding: 10px;
+        width: 100%;
+        max-width: 100vw;
+        box-sizing: border-box;
+    }
+    .output-section {
+        width: 100%;
+        max-width: 100vw;
+        padding: 18px 8px;
+        box-sizing: border-box;
+    }
+    .tip-btn-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .input-section, .output-section {
+        width: 100%;
+    }
+    .output-section {
+        margin-top: 20px;
+    }
+    .result-value span {
+        font-size: 1.8rem;
+    }
+    .reset-btn {
+        font-size: 1rem;
+    }
+    .tip-calculator-btn {
+        font-size: 1rem;
+    }
+    .input-field {
+        font-size: 0.9rem;
+    }
+    .result-label p {
+        font-size: 0.8rem;
+    }
+    .result-label span {
+        font-size: 0.7rem;
+    }
+    .result-value span {
+        font-size: 1.5rem;
+    }
+    .form-control>p {
+        font-size: 0.8rem;
+    }   
+    label {
+        font-size: 0.8rem;
+    }
+    .tip-custom-input {
+        width: 100%;
+    }
+    .tip-custom-input input {
+        width: 100%;
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+    .tip-custom-input input.error {
+        border-color: orangered;
+    }
+    .tip-custom-input input:focus {
+        border-color: #00474B;
+        outline: none;
+    }
+    .tip-calculator-btn {
+        width: 100%;
+        font-size: 1rem;
+    }
+    .reset-btn {
+        width: 100%;
+        font-size: 1rem;
+    }
+    .result-line {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .result-line p {
+        margin-bottom: 5px;
+    }
+    .result-line span {
+        text-align: left;
+    }
+    .result-value {
+        text-align: left;
+    }
+    .result-value span {
+        font-size: 1.5rem;
+    }
+    .result-label p {
+        font-size: 0.8rem;
+    }
+    .result-label span {
+        font-size: 0.7rem;
+    }
+    .result-line:last-of-type {
+        margin-bottom: 0;
+    }
+    .error {
+        border-color: orangered;
+    }
+    .error:focus {
+        border-color: #00474B;
+        outline: none;
+    }
+    .tip-btn-container {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .tip-calculator-btn.active {
+        background-color: #26C2AD;
+        color: #00474B;
+    }
+    .tip-calculator-btn.active:hover {
+        background-color: #9FE8DF;
+        color: #00474B;
+    }
+    .tip-calculator-btn.active:active {
+        background-color: #00474B;
+        color: #9FE8DF;
+    }
+}

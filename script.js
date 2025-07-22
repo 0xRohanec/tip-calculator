@@ -25,6 +25,16 @@ customtip.addEventListener('input', ()=>{
 })
 
 numofPeople.addEventListener('input',calculateTip)
+
+if (resetbtn) {
+    resetbtn.addEventListener('click', () => {
+        resetCalculator()
+    });
+} else {
+    console.error('Error: Reset button element not found. Cannot add event listener.');
+}
+
+
 function calculateTip() {
     const billValueStr = billinput.value;
     const peopleValueStr = numofPeople.value;
@@ -93,6 +103,37 @@ if (totalamountdisplay) {
     }
     if (customtip) {
         customtip.classList.toggle('error', !isCustomTipInputValid)
+    }
+}
+function resetCalculator() {
+    if (billinput) {
+        billinput.value = '';
+    }
+    if (customtip) {
+        customtip.value = '';
+    }
+    if(tipbutton&& tipbutton.length > 0) {
+        tipbutton.forEach(button => {
+        button.classList.remove('active');
+    })
+    }
+    if (numofPeople) {
+        numofPeople.value = '';
+    }
+    if (tipamountdisplay) {
+        tipamountdisplay.textContent = '$0.00';
+    }
+    if (totalamountdisplay) {
+        totalamountdisplay.textContent = '$0.00';
+    }
+    if (billinput) {
+        billinput.classList.remove('error');
+    }
+    if (numofPeople) {
+        numofPeople.classList.remove('error');
+    }
+    if (customtip) {
+        customtip.classList.remove('error');
     }
 }
 
