@@ -5,7 +5,9 @@ const numofPeople=document.getElementById("num-people")
 const tipamountdisplay=document.getElementById("tip-amount-display")
 const totalamountdisplay=document.getElementById("total-amount-display")
 const resetbtn=document.getElementById("reset-button")
+
 billinput.addEventListener('input',calculateTip)
+
 tipbutton.forEach(button=>{
     button.addEventListener('click',event=>{
         const clickedButton = event.target  
@@ -16,51 +18,82 @@ tipbutton.forEach(button=>{
         calculateTip();   
     })
 })
+
 customtip.addEventListener('input', ()=>{
     tipbutton.forEach(btn => btn.classList.remove('active'));
     calculateTip();
 })
+
 numofPeople.addEventListener('input',calculateTip)
 function calculateTip() {
     const billValueStr = billinput.value;
-const peopleValueStr = numofPeople.value;
-const customTipValueStr = customtip.value;
-let selectedButtonTipStr = null
-const activeButton = document.querySelector('.tip-calculator-btn.active')
-if (activeButton) {
-selectedButtonTipStr = activeButton.dataset.tip;
-}
-const billAmount = parseFloat(billValueStr)
-const numberOfPeople = parseFloat(peopleValueStr)
-const customTipPercent = parseFloat(customTipValueStr)
-const selectedButtonTipPercent = selectedButtonTipStr ? parseFloat(selectedButtonTipStr) : null;
+    const peopleValueStr = numofPeople.value;
+    const customTipValueStr = customtip.value;
+    let selectedButtonTipStr = null;
+    const activeButton = document.querySelector('.tip-calculator-btn.active');
+    if (activeButton) {
+        selectedButtonTipStr = activeButton.dataset.tip;
+    }
+    const billAmount = parseFloat(billValueStr);
+    const numberOfPeople = parseFloat(peopleValueStr);
+    const customTipPercent = parseFloat(customTipValueStr);
 
-let actualTipPercent = 0
-if (!isNaN(customTipPercent) && customTipPercent >= 0) {
-    actualTipPercent = customTipPercent
-}else if (selectedButtonTipPercent !== null && !isNaN(selectedButtonTipPercent) && selectedButtonTipPercent >= 0) {
-    actualTipPercent = selectedButtonTipPercent
-}
-let totalTipAmount = 0
-if (!isNaN(billAmount) && billAmount >= 0) {
-    totalTipAmount = billAmount * (actualTipPercent / 100)
-}
+    const isBillValid = !isNaN(billAmount) && billAmount >= 0;
+    const isCustomTipInputValid = customTipValueStr === '' || (!isNaN(customTipPercent) && customTipPercent >= 0);
+    const isPeopleValid = !isNaN(numberOfPeople) && numberOfPeople > 0 && Number.isInteger(numberOfPeople);
+
+    let actualTipPercent = 0;
+    if (customTipValueStr !== '' && !isNaN(customTipPercent) && customTipPercent >= 0) { 
+        actualTipPercent = customTipPercent;
+    } else if (customTipValueStr === '' && activeButton) { 
+        // Use activeButton.dataset.tip directly
+        const selectedButtonTipPercent = parseFloat(activeButton.dataset.tip);
+        if (!isNaN(selectedButtonTipPercent) && selectedButtonTipPercent >= 0) {
+            actualTipPercent = selectedButtonTipPercent;
+        }
+    }
+const isTipValid = !isNaN(actualTipPercent) && actualTipPercent >= 0
+let totalTipAmount = 0;
+    if (isBillValid && isTipValid) { 
+        totalTipAmount = billAmount * (actualTipPercent / 100);
+    }
 const totalBillAmount = billAmount + totalTipAmount
+
 let tipAmountPerPerson = 0
-if (!isNaN(totalTipAmount) && !isNaN(numberOfPeople) && numberOfPeople > 0) {
-    tipAmountPerPerson = totalTipAmount / numberOfPeople
-}
 let totalAmountPerPerson = 0
-if (!isNaN(totalBillAmount) && !isNaN(numberOfPeople) && numberOfPeople > 0) {
-    totalAmountPerPerson = totalBillAmount / numberOfPeople
+if (isBillValid && isTipValid && isPeopleValid) { 
+        tipAmountPerPerson = totalTipAmount / numberOfPeople;
+        totalAmountPerPerson = totalBillAmount / numberOfPeople;
+    } else {
+    tipAmountPerPerson = 0
+    totalAmountPerPerson = 0
 }
-console.log({ // Logging as an object for better readability in console
-        billAmount,
-        numberOfPeople,
-        actualTipPercent,
-        totalTipAmount,
-        totalBillAmount,
-        tipAmountPerPerson,
-        totalAmountPerPerson
-    });
+const formattedTipAmount = tipAmountPerPerson.toFixed(2)
+const formattedTotalAmount = totalAmountPerPerson.toFixed(2)
+
+const displayTipAmount = `$${formattedTipAmount}`
+const displayTotalAmount = `$${formattedTotalAmount}`
+
+if (tipamountdisplay) { 
+        tipamountdisplay.textContent = displayTipAmount;
+} else {
+        console.error('Error: tipAmountDisplay element not found in the DOM.');
 }
+if (totalamountdisplay) { 
+        totalamountdisplay.textContent = displayTotalAmount;
+    } else {
+        console.error('Error: totalAmountDisplay element not found in the DOM.');
+    }
+
+    if (billinput) {
+        billinput.classList.toggle('error', !isBillValid)
+    }
+    if (numofPeople) {
+        numofPeople.classList.toggle('error', !isPeopleValid)
+    }
+    if (customtip) {
+        customtip.classList.toggle('error', !isCustomTipInputValid)
+    }
+}
+
+document.addEventListener('DOMContentLoaded', calculateTip)

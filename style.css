@@ -128,3 +128,7 @@ label,.form-control>p{
     background-color: #00474B;
     color: #9FE8DF;
 }
+.error{
+    border: solid 1px orangered;
+    outline: none;
+}
