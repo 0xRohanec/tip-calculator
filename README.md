@@ -22,10 +22,20 @@ It allows users to quickly calculate the **tip amount** and **total per person**
 
 - **HTML5**
 - **CSS3** (Flexbox, Grid, Media Queries)
-- **Vanilla JavaScript** (DOM Manipulation, Validation)
+- **JavaScript** (DOM Manipulation, Validation)
+  
+---
+
+### 📷 Demo
+![Tip-Calculator UI](demo.png)
 
 ---
 
+## ✅ Live Preview
+
+🖥️ [Click here to view the live app](https://0xrohanec.github.io/tip-calculator/)
+
+---
 ## 📦 How to Use
 
 1. **Clone the repository**
@@ -44,3 +54,7 @@ Open it in your code editor and launch with Live Server (VSCode extension)
 Enter bill amount, select tip %, and number of people
 
 View calculated results instantly
+
+## Or
+click on live preview option given above
+
